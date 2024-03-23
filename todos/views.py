@@ -1,13 +1,11 @@
-from .models import TodoItem
-from rest_framework import serializers, permissions
+from .models import Todo
+from rest_framework import viewsets, permissions
 from .serializers import TodoSerializer
 
-class TodoItemSerializer(serializers.ModelSerializer):
-   # for configuring the todoserializer above
-    queryset = TodoItem.objects.all()
-    # use the TodoSerializer class to serialize the data
-    serializer_class = TodoSerializer
-    # unrestricted access to the API
-    permission_classes = [permissions.AllowAny]
-
-    # no need to create routes. these are it.
+class TodoViewSet(viewsets.ModelViewSet):
+    #Everything in the todo object (which is everything -everything)
+    queryset=Todo.objects.all()
+    # sepcificies the which serializer to use. In this case, we will be use the file: TodoSerializer to do the serialization and deserialization
+    serializer_class=TodoSerializer
+    # unrestricted access to the api
+    permission_classes=[permissions.AllowAny]
